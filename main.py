@@ -24,7 +24,7 @@ def main():
     window = sg.Window("Random Line Viewer", layout)
 
     while True:
-        event, values = window.read()
+        event, values = window.read() # type: ignore
 
         if event == sg.WIN_CLOSED:
             break
@@ -32,11 +32,11 @@ def main():
             if file_path := sg.popup_get_file("Select a text file", font=font):
                 lines = read_lines_from_file(file_path)
         elif event == "Show Random Line":
-            if lines:
+            if lines: # type: ignore
                 random_line = random.choice(lines).strip()
-                window["-OUTPUT-"].update(random_line)
+                window["-OUTPUT-"].update(random_line) # type: ignore
             else:
-                window["-OUTPUT-"].update("No lines in the file.")
+                window["-OUTPUT-"].update("No lines in the file.") # type: ignore
 
     window.close()
 
