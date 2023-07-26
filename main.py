@@ -2,6 +2,7 @@ import PySimpleGUI as sg
 import random
 
 def read_lines_from_file(filename):
+    
     with open(filename, "r") as file:
         lines = file.readlines()
     return lines
@@ -9,15 +10,12 @@ def read_lines_from_file(filename):
 def main():
     sg.theme("DarkAmber")  # Optional: Set the PySimpleGUI theme
 
-    # Define the custom font file path
-    font_size = 18  # Adjust the font size as per your preference
 
-    # Set the font for the window and elements
-    font = ('Arial', font_size)
-
+    # Set the font family and size 
+    font = 'Chandas 18'
     # Use the font in the layout
     layout = [
-        [sg.Button("Browse"), sg.Button("Show Random Line")],
+        [sg.Button("Browse", font=font), sg.Button("Show Random Line", font=font)],
         [sg.Text(size=(80, 5), key="-OUTPUT-", font=font)],
     ]
 
@@ -32,7 +30,7 @@ def main():
             if file_path := sg.popup_get_file("Select a text file", font=font):
                 lines = read_lines_from_file(file_path)
         elif event == "Show Random Line":
-            if lines: # type: ignore
+            if lines != '': # type: ignore
                 random_line = random.choice(lines).strip()
                 window["-OUTPUT-"].update(random_line) # type: ignore
             else:
