@@ -29,8 +29,7 @@ def main():
         if event == sg.WIN_CLOSED:
             break
         elif event == "Browse":
-            file_path = sg.popup_get_file("Select a text file", font=font)
-            if file_path:
+            if file_path := sg.popup_get_file("Select a text file", font=font):
                 lines = read_lines_from_file(file_path)
         elif event == "Show Random Line":
             if lines:
